@@ -124,7 +124,7 @@ def main():
     start_button = tkinter.Button(frame, text="Start", command=start_execution, width=6)
 
     time_step = tkinter.DoubleVar()
-    time_step.set(1)
+    time_step.set(1000)
     time_step_entry = tkinter.Entry(frame, textvariable=time_step)
 
     time_speed = tkinter.DoubleVar()
