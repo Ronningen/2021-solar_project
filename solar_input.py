@@ -20,11 +20,11 @@ def read_space_objects_data_from_file(input_filename):
             if len(line.strip()) == 0 or line[0] == '#':
                 continue  # пустые строки и строки-комментарии пропускаем
             object_type = line.split()[0].lower()
-            if object_type == "Star":  # FIXED: do the same for planet 
+            if object_type == "star":  # FIXED: do the same for planet 
                 star = Star()
                 parse_star_parameters(line, star)
                 objects.append(star)
-            elif object_type == "Planet": 
+            elif object_type == "planet": 
                 planet = Planet()
                 parse_planet_parameters(line, planet)
                 objects.append(planet)
@@ -49,13 +49,13 @@ def parse_star_parameters(line, star):
     **star** — объект звезды.
     """
     massiv = list(line.strip().split())
-    star.R = int(massiv[1])
+    star.R = float(massiv[1])
     star.color = massiv[2]
-    star.m = int(massiv[3])
-    star.x = int(massiv[4])
-    star.y = int(massiv[5])
-    star.Vx = int(massiv[6])
-    star.Vy = int(massiv[7])
+    star.m = float(massiv[3])
+    star.x = float(massiv[4])
+    star.y = float(massiv[5])
+    star.Vx = float(massiv[6])
+    star.Vy = float(massiv[7])
 
 def parse_planet_parameters(line, planet):
     """Считывает данные о планете из строки.
@@ -73,13 +73,13 @@ def parse_planet_parameters(line, planet):
     **planet** — объект планеты.
     """
     massiv = list(line.strip().split())
-    planet.R = int(massiv[1])
+    planet.R = float(massiv[1])
     planet.color = massiv[2]
-    planet.m = int(massiv[3])
-    planet.x = int(massiv[4])
-    planet.y = int(massiv[5])
-    planet.Vx = int(massiv[6])
-    planet.Vy = int(massiv[7])
+    planet.m = float(massiv[3])
+    planet.x = float(massiv[4])
+    planet.y = float(massiv[5])
+    planet.Vx = float(massiv[6])
+    planet.Vy = float(massiv[7])
 
 
 def write_space_objects_data_to_file(output_filename, space_objects):
