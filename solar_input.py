@@ -1,5 +1,6 @@
 # coding: utf-8
 # license: GPLv3
+# Пробный коммит
 
 from solar_objects import Star, Planet
 
