@@ -25,6 +25,9 @@ time_step = None
 space_objects = []
 """Список космических объектов."""
 
+stat_file = []
+"""Файл для записи статистики"""
+
 
 def execution():
     """Функция исполнения -- выполняется циклически, вызывая обработку всех небесных тел,
@@ -37,6 +40,7 @@ def execution():
     recalculate_space_objects_positions(space_objects, time_step.get())
     for body in space_objects:
         update_object_position(space, body)
+        append_space_objects_stat_to_file(r"stat.txt", space_objects, physical_time)
     physical_time += time_step.get()
     displayed_time.set("%.1f" % physical_time + " seconds gone")
 
@@ -75,6 +79,7 @@ def open_file_dialog():
     """
     global space_objects
     global perform_execution
+
     perform_execution = False
     for obj in space_objects:
         space.delete(obj.image)  # удаление старых изображений планет
@@ -117,21 +122,26 @@ def main():
 
     root = tkinter.Tk()
     # космическое пространство отображается на холсте типа Canvas
-    space = tkinter.Canvas(root, width=window_width, height=window_height, bg="black")
+    space = tkinter.Canvas(root, width=window_width,
+                           height=window_height, bg="black")
     # нижняя панель с кнопками
     frame = tkinter.Frame(root)
 
-    start_button = tkinter.Button(frame, text="Start", command=start_execution, width=6)
+    start_button = tkinter.Button(
+        frame, text="Start", command=start_execution, width=6)
 
     time_step = tkinter.DoubleVar()
-    time_step.set(1)
+    time_step.set(1000)
     time_step_entry = tkinter.Entry(frame, textvariable=time_step)
 
     time_speed = tkinter.DoubleVar()
-    scale = tkinter.Scale(frame, variable=time_speed, orient=tkinter.HORIZONTAL)
+    scale = tkinter.Scale(frame, variable=time_speed,
+                          orient=tkinter.HORIZONTAL)
 
-    load_file_button = tkinter.Button(frame, text="Open file...", command=open_file_dialog)
-    save_file_button = tkinter.Button(frame, text="Save to file...", command=save_file_dialog)
+    load_file_button = tkinter.Button(
+        frame, text="Open file...", command=open_file_dialog)
+    save_file_button = tkinter.Button(
+        frame, text="Save to file...", command=save_file_dialog)
 
     displayed_time = tkinter.StringVar()
     displayed_time.set(str(physical_time) + " seconds gone")
@@ -148,6 +158,7 @@ def main():
 
     root.mainloop()
     print('Modelling finished!')
+
 
 if __name__ == "__main__":
     main()
